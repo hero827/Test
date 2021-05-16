@@ -1,0 +1,12 @@
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\DataActivityService.exe
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\DataActivityService.dll
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\DataActivityService.deps.json
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\DataActivityService.runtimeconfig.json
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\DataActivityService.pdb
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\RestSharp.dll
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\System.Data.SqlClient.dll
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\runtimes\win-arm64\native\sni.dll
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\runtimes\win-x64\native\sni.dll
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\runtimes\win-x86\native\sni.dll
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\temp\take_home\DataActivityService\bin\Release\net5.0\publish\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
