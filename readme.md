@@ -76,9 +76,9 @@ The transformed output should be streamed to a table `SportClassYearProfileViewS
 
 ## Background
 
-### central-sql-db Database
+### central-sql-db.fl-central Database
 
-This database is intended to simulate a typical production OLTP database.  
+The database `fl-central` is intended to simulate a typical production OLTP database.  
 It is running inside a MSSQL docker container `central-sql-db`  
 
 * rows can be inserted and modified, including the aggregate key columns
@@ -127,10 +127,10 @@ The SQL container is mapped to the host port 44331
 
 
 
-### eventlogs-db Database
+### eventlogs-db.fl-eventlogs Database
 
-This database is intended to simulate a event data store (e.g. Kafka, log files, etc)
-For simplicity, it is implemented as a MSSQL docker container `eventlogs-db`  and the event data is written to a table `AthleteProfileViewLog`.
+The database `fl-eventlogs` is intended to simulate a event data store (e.g. Kafka, log files, etc)
+For simplicity, it is implemented inside a MSSQL docker container `eventlogs-db`  and the event data is written to a table `AthleteProfileViewLog`.
 
 * data is insert only (no updates or deletes)
 * each row represents a coach/recruiter (UserId) that has viewed an athlete's profile in the application.
@@ -174,12 +174,12 @@ CREATE TABLE SportClassYearProfileViewSummary (
 ### data-activity-service
 
 This container simulates the OLTP and event log activity in the docker-compose environment.  The service performs the following functions:
-*  creates new athletes in `central-sql-db` via procedure `CreateNewAthlete`
-*  modifies existing athletes in `central-sql-db` via a procedure `UpdateAthlete`
-*  creates new event log messages in `eventlogs-db` via procedure `CreateAthleteProfileViewEvent`
+*  creates new athletes in `fl-central` via procedure `CreateNewAthlete`
+*  modifies existing athletes in `fl-central` via a procedure `UpdateAthlete`
+*  creates new event log messages in `fl-eventlogs` via procedure `CreateAthleteProfileViewEvent`
 
 
-The service can be controlled by a table `testControl` in `central-sql-db`.
+The service can be controlled by a table `testControl` in `fl-central`.
 
 ```
 CREATE TABLE dbo.testControl(
