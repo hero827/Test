@@ -2,10 +2,12 @@
 
 ## Purpose
 
-The goal of this project is to help us understand your data engineering abilities.  We do not expect you to spend more than a few hours completing the exercise.
+The goal of this project is to help us understand your data engineering abilities.  We do not expect you to spend more than a few hours completing the exercise.  There's no hard time limit, so work on it at your convenience.  Also, questions are definately welcome, so ask away.
 
-The objective of the exercise is to implement a data stream processor.  The solution should be a dotnet core console application and should be capable to run as a container in docker. 
-It needs to process data changes from two different data sources (an OLTP database and an event log database) and produce a transformed result to a third database.
+## Objective
+
+The objective of the exercise is to implement a data stream processor.  The solution should be a **dotnet core console application**.  It should be able to run as a container in docker. 
+The application needs to process data changes from two different data sources (an OLTP database and an event log database) and produce a transformed result to a third database.
 
 
 ![Complete Setup](img/overview.png)
@@ -22,7 +24,6 @@ It needs to process data changes from two different data sources (an OLTP databa
 
 1) docker
 2) C# development environment (e.g. Visual Studio, VS Code)
-3) Azure Data Studio (optional for querying SQL Server and PostgreSQL)
 
 
 #### Run the programming environment
@@ -50,21 +51,26 @@ SELECT a.Sport
       , a.RecruitingClassYear
       , sum( case when datediff( mi, l.dateutc, sysutcdatetime()) < 10 then 1 else 0 end ) as ProvileViewsLast10min
       , count(*) as totalprofileViews
-      ,max( l.dateutc ) as last_profileViewTime
-FROM dbo.AthleteProfileViewLog l
-JOIN dbo.Athlete a on a.athleteId = l.athleteid
+      , max( l.dateutc ) as last_profileViewTime
+FROM AthleteProfileViewLog l
+JOIN Athlete a on a.athleteId = l.athleteid
 GROUP BY a.sport
       ,a.recruitingClassYear
 
 ```
 
-The transformed output should land in a table `SportClassYearProfileViewSummary` on the the PostgreSQL database `datalake`.  
+The transformed output should be streamed to a table `SportClassYearProfileViewSummary` on the the PostgreSQL database `datalake`.  
 
 
 
 ## Deliverables
 
-Your applicatiion should TBD include and either run as a stand alone console application, docker container, and/or Visual Studio.
+ *  Your applicatiion should include and either run as a stand alone console application, docker container, and/or Visual Studio.
+ *  Please provide a single solution file (*.sln) that can be compiled and launched from Visual Studio.
+ *  invite our github user "fl-codereview" to be a collaborator on the repository
+ *  create a pull request against your Github repository
+ *  let us(your interview coordinator) know when you are ready to review
+
 
 
 
@@ -123,12 +129,12 @@ It is running inside a MSSQL docker container `fl-central`
 
 ### fl-eventlogs Database
 
-This database is intended to simulate a event data store, such as Kafka, log files, etc
+This database is intended to simulate a event data store (e.g. Kafka, log files, etc)
 For simplicity, it is implemented as a MSSQL docker container `fl-eventlogs`  and the event data is written to a table `AthleteProfileViewLog`.
 
 * data is insert only (no updates or deletes)
 * each row represents a coach/recruiter (UserId) that has viewed an athlete's profile in the application.
-
+* events are uniquely identified by a incrementing key `profileviewlogid`
 
 #### AthleteProfileViewLog 
 
