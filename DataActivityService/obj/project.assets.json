@@ -572,11 +572,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\temp\\take_home\\DataActivityService\\DataActivityService.csproj",
+      "projectUniqueName": "C:\\work\\fieldlevel-data-engineer-take-home\\DataActivityService\\DataActivityService.csproj",
       "projectName": "DataActivityService",
-      "projectPath": "C:\\temp\\take_home\\DataActivityService\\DataActivityService.csproj",
+      "projectPath": "C:\\work\\fieldlevel-data-engineer-take-home\\DataActivityService\\DataActivityService.csproj",
       "packagesPath": "C:\\Users\\daniel\\.nuget\\packages\\",
-      "outputPath": "C:\\temp\\take_home\\DataActivityService\\obj\\",
+      "outputPath": "C:\\work\\fieldlevel-data-engineer-take-home\\DataActivityService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",

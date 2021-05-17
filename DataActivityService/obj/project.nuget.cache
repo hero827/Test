@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ETTYDc3q4a3IBrhQpUIMUIGgVMrES4ZZB2N2yFTT2Cq5X5Tx7Jmv4934OE0ffSliLLN5hdNxNwlYC3xgz4/fDw==",
+  "dgSpecHash": "fX7FC1a/ia+hkgzrX+FDNb8Narxsi+nrRPrCh9CDBzGgUeDIJfKihY+AMhwviqsCrZiqZdRjbvrxRQqTs88+lQ==",
   "success": true,
-  "projectFilePath": "C:\\temp\\take_home\\DataActivityService\\DataActivityService.csproj",
+  "projectFilePath": "C:\\work\\fieldlevel-data-engineer-take-home\\DataActivityService\\DataActivityService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\daniel\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\daniel\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.13\\microsoft.visualstudio.azure.containers.tools.targets.1.10.13.nupkg.sha512",

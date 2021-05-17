@@ -1,5 +1,0 @@
-FROM mcr.microsoft.com/dotnet/runtime:5.0 AS runtime
-WORKDIR /app
-COPY /bin/Release .
-
-ENTRYPOINT ["dotnet", "DataActivityService.dll"]
