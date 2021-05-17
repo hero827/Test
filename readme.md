@@ -65,9 +65,9 @@ The transformed output should be streamed to a table `SportClassYearProfileViewS
 
 ## Deliverables
 
- *  your application should include and either run as a stand alone console application, docker container, and/or Visual Studio.
+ *  your application should be able to be run as a stand alone console application, docker container, or from inside Visual Studio.
  *  please provide a solution file (*.sln) that can be compiled and launched from Visual Studio.
- *  include a datbase script with DDL for `SportClassYearProfileViewSummary` as well as any other DDL you deem necessary.
+ *  include a database script with DDL for `SportClassYearProfileViewSummary` as well as any other DDL you deem necessary.
  *  invite our github user "fl-codereview" to be a collaborator on the repository
  *  create a pull request against your Github repository
  *  let us(your interview coordinator) know when you are ready to review
