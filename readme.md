@@ -32,8 +32,8 @@ The application needs to process data changes from two different data sources (a
 > docker-compose up -d 
 ```
 The docker compose will create the following containers.  Their purpose is described in more detail below.
-* fl-central 
-* fl-eventlogs
+* central-sql-db 
+* eventlogs-db
 * datalake 
 * data-activity-service
 
@@ -76,14 +76,16 @@ The transformed output should be streamed to a table `SportClassYearProfileViewS
 
 ## Background
 
-### fl-central Database
+### central-sql-db Database
 
 This database is intended to simulate a typical production OLTP database.  
-It is running inside a MSSQL docker container `fl-central`  
+It is running inside a MSSQL docker container `central-sql-db`  
 
 * rows can be inserted and modified, including the aggregate key columns
 * an updated row is noted by a change in `modifiedDate` as well as in incremented unique sequence `latestOffset`
 * each row represents a single `Athlete`.  The data is maintained by the application and can be altered by the Athlete and/or their team's coaching staff.
+
+The SQL container is mapped to the host port 44331
 
 #### Athlete 
 
@@ -125,14 +127,16 @@ It is running inside a MSSQL docker container `fl-central`
 
 
 
-### fl-eventlogs Database
+### eventlogs-db Database
 
 This database is intended to simulate a event data store (e.g. Kafka, log files, etc)
-For simplicity, it is implemented as a MSSQL docker container `fl-eventlogs`  and the event data is written to a table `AthleteProfileViewLog`.
+For simplicity, it is implemented as a MSSQL docker container `eventlogs-db`  and the event data is written to a table `AthleteProfileViewLog`.
 
 * data is insert only (no updates or deletes)
 * each row represents a coach/recruiter (UserId) that has viewed an athlete's profile in the application.
 * events are uniquely identified by a incrementing key `profileviewlogid`
+
+The SQL container is mapped to the host port 44332
 
 #### AthleteProfileViewLog 
 
@@ -151,7 +155,7 @@ GO
 
 ### datalake Database
 
-This is a PostgreSQL database.  The stream processor needs to deliver the updated output to the table `SportClassYearProfileViewSummary` described below:
+This is a PostgreSQL database.  The container is mapped to the PostgreSQL default port 5432 on the host.  The stream processor needs to deliver the updated output to the table `SportClassYearProfileViewSummary` described below:
 
 #### SportClassYearProfileViewSummary 
 
@@ -170,12 +174,12 @@ CREATE TABLE SportClassYearProfileViewSummary (
 ### data-activity-service
 
 This container simulates the OLTP and event log activity in the docker-compose environment.  The service performs the following functions:
-*  creates new athletes in `fl-central` via procedure `CreateNewAthlete`
-*  modifies existing athletes in `fl-central` via a procedure `UpdateAthlete`
-*  creates new event log messages in `fl-eventlogs` via procedure `CreateAthleteProfileViewEvent`
+*  creates new athletes in `central-sql-db` via procedure `CreateNewAthlete`
+*  modifies existing athletes in `central-sql-db` via a procedure `UpdateAthlete`
+*  creates new event log messages in `eventlogs-db` via procedure `CreateAthleteProfileViewEvent`
 
 
-The service can be controlled by a table `testControl` in `fl-central`.
+The service can be controlled by a table `testControl` in `central-sql-db`.
 
 ```
 CREATE TABLE dbo.testControl(
