@@ -65,14 +65,12 @@ The transformed output should be streamed to a table `SportClassYearProfileViewS
 
 ## Deliverables
 
- *  Your applicatiion should include and either run as a stand alone console application, docker container, and/or Visual Studio.
- *  Please provide a single solution file (*.sln) that can be compiled and launched from Visual Studio.
+ *  your application should include and either run as a stand alone console application, docker container, and/or Visual Studio.
+ *  please provide a solution file (*.sln) that can be compiled and launched from Visual Studio.
+ *  include a datbase script with DDL for `SportClassYearProfileViewSummary` as well as any other DDL you deem necessary.
  *  invite our github user "fl-codereview" to be a collaborator on the repository
  *  create a pull request against your Github repository
  *  let us(your interview coordinator) know when you are ready to review
-
-
-
 
 
 
@@ -83,7 +81,7 @@ The transformed output should be streamed to a table `SportClassYearProfileViewS
 This database is intended to simulate a typical production OLTP database.  
 It is running inside a MSSQL docker container `fl-central`  
 
-* rows can be inserted and updated
+* rows can be inserted and modified, including the aggregate key columns
 * an updated row is noted by a change in `modifiedDate` as well as in incremented unique sequence `latestOffset`
 * each row represents a single `Athlete`.  The data is maintained by the application and can be altered by the Athlete and/or their team's coaching staff.
 
@@ -155,6 +153,8 @@ GO
 
 This is a PostgreSQL database.  The stream processor needs to deliver the updated output to the table `SportClassYearProfileViewSummary` described below:
 
+#### SportClassYearProfileViewSummary 
+
 ```
 CREATE TABLE SportClassYearProfileViewSummary (
     Sport varchar(50) not null ,
@@ -164,3 +164,30 @@ CREATE TABLE SportClassYearProfileViewSummary (
     constraint pk_SportClassYearProfileViewSummary primary key ( Sport, RecruitingClassYear )
 )
 ```
+
+
+
+### data-activity-service
+
+This container simulates the OLTP and event log activity in the docker-compose environment.  The service performs the following functions:
+*  creates new athletes in `fl-central` via procedure `CreateNewAthlete`
+*  modifies existing athletes in `fl-central` via a procedure `UpdateAthlete`
+*  creates new event log messages in `fl-eventlogs` via procedure `CreateAthleteProfileViewEvent`
+
+
+The service can be controlled by a table `testControl` in `fl-central`.
+
+```
+CREATE TABLE dbo.testControl(
+	     StartAthleteCount int not null 
+        ,MaxAthleteCount int not null 
+        ,AthleteInsertRatePerMin int not null 
+        ,AthleteUpdateRatePerMin int not null
+        ,StartEventCount int not null 
+        ,MaxEventCount int not null 
+        ,EventRatePerMin int not null 
+        ,LatestOffset bigint not null PRIMARY KEY 
+    ) 
+```
+
+
