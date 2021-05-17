@@ -82,7 +82,7 @@ The database `fl-central` is intended to simulate a typical production OLTP data
 It is running inside a MSSQL docker container `central-sql-db`  
 
 * rows can be inserted and modified, including the aggregate key columns
-* an updated row is noted by a change in `modifiedDate` as well as in incremented unique sequence `latestOffset`
+* an updated row is noted by a change in `modifiedDate` as well as in an incremented unique sequence `latestOffset`
 * each row represents a single `Athlete`.  The data is maintained by the application and can be altered by the Athlete and/or their team's coaching staff.
 
 The SQL container is mapped to the host port 44331
@@ -155,19 +155,7 @@ GO
 
 ### datalake Database
 
-This is a PostgreSQL database.  The container is mapped to the PostgreSQL default port 5432 on the host.  The stream processor needs to deliver the updated output to the table `SportClassYearProfileViewSummary` described below:
-
-#### SportClassYearProfileViewSummary 
-
-```
-CREATE TABLE SportClassYearProfileViewSummary (
-    Sport varchar(50) not null ,
-    RecruitingClassYear int not null  ,
-    TotalProfileViews int not null ,
-    LastProfileViewTime date not null ,
-    constraint pk_SportClassYearProfileViewSummary primary key ( Sport, RecruitingClassYear )
-)
-```
+This is a PostgreSQL database.  The container is mapped to the PostgreSQL default port 5432 on the host.  The stream processor needs to deliver the output to a table `SportClassYearProfileViewSummary`.  
 
 
 
