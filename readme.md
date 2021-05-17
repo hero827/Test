@@ -44,7 +44,7 @@ The docker compose will create the following containers.  Their purpose is descr
 The project requires you to consume changes from two different input data sets, perform a transformation of the data and write the output to another database.  The output should be produced in real-time (or near real-time) based on changes from the input data sets.  
 
 #### Transformation logic
-This SQL expression is the psuedo code for how the data input streams should be transformed.  You application needs to perform this function.
+This SQL expresses the psuedo code for how the data input streams should be transformed.  You application needs to perform this function.
 
 ```
 SELECT a.Sport
