@@ -1,4 +1,4 @@
-# FieldLevel Data Engineering Position Take Home Project
+# FieldLevel Data Engineering Position Take Home Project 
 
 ## Purpose
 
@@ -22,12 +22,13 @@ The application needs to process data changes from two different data sources (a
 
 ## Prerequisites
 
-1) docker
-2) C# development environment (e.g. Visual Studio, VS Code)
+1. docker
+1. C# development environment (e.g. Visual Studio, VS Code)
 
 
 #### Run the programming environment
-1. Create the docker environment.  
+1. In a shall, navigate to your git repo
+1. Create the docker environment.
 ```
 > docker-compose up -d 
 ```
@@ -44,7 +45,11 @@ The docker compose will create the following containers.  Their purpose is descr
 The project requires you to consume changes from two different input data sets, perform a transformation of the data and write the output to another database.  The output should be produced in real-time (or near real-time) based on changes from the input data sets.  
 
 #### Transformation logic
-This SQL expresses the psuedo code for how the data input streams should be transformed.  You application needs to perform this function.
+
+The following SQL expresses the **psuedo code** for how the data input streams should be transformed.  We expect your solution to refactor this SQL statement into an fully containerized implementation (e.g. in C#) but **not** using an traditional disk based RDBMS (SQL Server, PostgreSQL, etc) to compute the result.  
+
+Also note that you are free to include any other publicly available technologies (e.g. Kafka, Redis, Ignite) into your solution if you so desire.  It isn't a requirement but whatever you decide, just be sure to package it up so it can be run in the same docker environment. 
+
 
 ```
 SELECT a.Sport
@@ -71,7 +76,7 @@ The transformed output should be streamed to a table `SportClassYearProfileViewS
  *  include any deployment instructions in a readme.md file.  These can include manual steps that need to be run first (e.g. execute DDL scripts on the PostgreSQL database)
  *  invite our github user "fl-codereview" to be a collaborator on the repository
  *  create a pull request against your Github repository
- *  let us(your interview coordinator) know when you are ready to review
+ *  let us (your interview coordinator) know when you are ready to review
 
 
 
