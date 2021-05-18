@@ -47,7 +47,8 @@ The project requires you to consume changes from two different input data sets, 
 #### Transformation logic
 
 The following SQL expresses the **psuedo code** for how the data input streams should be transformed.  We expect your solution to refactor this SQL statement into an fully containerized implementation (e.g. in C#) but **not** using an traditional disk based RDBMS (SQL Server, PostgreSQL, etc) to compute the result.  
-Also note that you are free to include any other publicly available technologies (e.g. Kafka, Redis, Ignite) into your solution if you so desire.  It isn't a requirement but whatever you decide, just be sure to package it up so it can be run on in the same docker environment. 
+
+Also note that you are free to include any other publicly available technologies (e.g. Kafka, Redis, Ignite) into your solution if you so desire.  It isn't a requirement but whatever you decide, just be sure to package it up so it can be run in the same docker environment. 
 
 
 ```
