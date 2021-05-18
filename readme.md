@@ -68,7 +68,7 @@ The transformed output should be streamed to a table `SportClassYearProfileViewS
 
 ## Deliverables
 
- *  your application should be able to be run as in the Visual Studio debugger, or as a stand alone console application, or as a docker container.
+ *  your application should be able to be run in the Visual Studio debugger, or as a stand alone console application, or as a docker container.
  *  please provide a solution file (*.sln) that can be compiled and launched from Visual Studio.
  *  include a database script with DDL for `SportClassYearProfileViewSummary` as well as any other DDL you deem necessary.
  *  include any deployment instructions in a readme.md file.  These can include manual steps that need to be run first (e.g. execute DDL scripts on the PostgreSQL database). 
@@ -178,31 +178,13 @@ The service can be controlled by a table `testControl` in `fl-central`.  When th
 *  StartAthleteCount: 1000
 *  AthleteInsertRatePerMin: 20
 *  AthleteUpdateRatePerMin: 15
+*  MaxAthleteCount: 300000
 
 **AthleteProfileViewLog**
 
 *  StartEventCount: 100
 *  EventRatePerMin: 500
-
-
-INSERT INTO dbo.testControl(
-    StartAthleteCount 
-    ,MaxAthleteCount 
-    ,AthleteInsertRatePerMin 
-    ,AthleteUpdateRatePerMin 
-    ,StartEventCount 
-    ,MaxEventCount 
-    ,EventRatePerMin 
-    ,LatestOffset
-)
-VALUES (
-     1000 
-    ,300000
-    ,20 
-    ,15
-    ,100
-    ,200000000
-    ,500
+*  MaxEventCount: 200000000
 
 
 ```
