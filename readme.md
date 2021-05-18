@@ -173,12 +173,14 @@ This container simulates the OLTP and event log activity in the docker-compose e
 
 The service can be controlled by a table `testControl` in `fl-central`.  When the service is started, the default settings are:
 
-** Athlete **
+**Athlete**
+
 *  StartAthleteCount: 1000
 *  AthleteInsertRatePerMin: 20
 *  AthleteUpdateRatePerMin: 15
 
-** AthleteProfileViewLog **
+**AthleteProfileViewLog**
+
 *  StartEventCount: 100
 *  EventRatePerMin: 500
 
