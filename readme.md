@@ -27,7 +27,7 @@ The application needs to process data changes from two different data sources (a
 
 
 #### Run the programming environment
-1. In a shall, navigate to your git repo
+1. In a shell, navigate to your git repo
 1. Create the docker environment.
 ```
 > docker-compose up -d 
@@ -46,7 +46,7 @@ The project requires you to consume changes from two different input data sets, 
 
 #### Transformation logic
 
-The following SQL expresses the **psuedo code** for how the data input streams should be transformed.  We expect your solution to refactor this SQL statement into an fully containerized implementation (e.g. in C#) but **not** using an traditional disk based RDBMS (SQL Server, PostgreSQL, etc) to compute the result.  
+The following SQL expresses the **psuedo code** for how the data input streams should be transformed.  We expect your solution to refactor this SQL statement into an fully containerized implementation (e.g. in C#) but **not** using a traditional disk based RDBMS (SQL Server, PostgreSQL, MySQL, etc) to compute the result.  
 
 Also note that you are free to include any other publicly available technologies (e.g. Kafka, Redis, Ignite) into your solution if you so desire.  It isn't a requirement but whatever you decide, just be sure to package it up so it can be run in the same docker environment. 
 
@@ -88,7 +88,7 @@ The database `fl-central` is intended to simulate a typical production OLTP data
 It is running inside a MSSQL docker container `central-sql-db`  
 
 * rows can be inserted and modified, including the aggregate key columns
-* an updated row is noted by a change in `modifiedDate` as well as in an incremented unique sequence `latestOffset`
+* an updated row is noted by a change in `modifiedDate` as well as in an incremented, unique sequence `latestOffset`
 * each row represents a single `Athlete`.  The data is maintained by the application and can be altered by the Athlete and/or their team's coaching staff.
 
 The SQL container is mapped to the host port 44331
