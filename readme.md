@@ -6,8 +6,7 @@ The goal of this project is to help us understand your data engineering abilitie
 
 ## Objective
 
-The objective of the exercise is to implement a data stream processor.  The solution should be a **dotnet core console application**.  It should be able to run as a container in docker. 
-The application needs to process data changes from two different data sources (an OLTP database and an event log database) and produce a transformed result to a third database.
+The objective of the exercise is to implement a data stream processor.  The solution should be implemented as a **dotnet core console application**.  The application needs to process data changes from two different data sources (an OLTP database and an event log database) and produce a transformed result to a third database.
 
 
 ![Complete Setup](img/overview.png)
@@ -52,11 +51,10 @@ Also note that you are free to include any other publicly available technologies
 
 
 ```
-SELECT a.Sport
+SELECT  a.Sport
       , a.RecruitingClassYear
-      , sum( case when datediff( mi, l.dateutc, sysutcdatetime()) < 10 then 1 else 0 end ) as ProvileViewsLast10min
-      , count(*) as totalprofileViews
-      , max( l.dateutc ) as last_profileViewTime
+      , count(*) as totalProfileViews
+      , max( l.dateutc ) as lastProfileViewTime
 FROM AthleteProfileViewLog l
 JOIN Athlete a on a.athleteId = l.athleteid
 GROUP BY a.sport
@@ -64,16 +62,16 @@ GROUP BY a.sport
 
 ```
 
-The transformed output should be streamed to a table `SportClassYearProfileViewSummary` on the the PostgreSQL database `datalake`.  
+The transformed output should be streamed to a table `SportClassYearProfileViewSummary` on the PostgreSQL database `datalake`.  
 
 
 
 ## Deliverables
 
- *  your application should be able to be run as a stand alone console application, docker container, or from inside Visual Studio.
+ *  your application should be able to be run as in the Visual Studio debugger, or as a stand alone console application, or as a docker container.
  *  please provide a solution file (*.sln) that can be compiled and launched from Visual Studio.
  *  include a database script with DDL for `SportClassYearProfileViewSummary` as well as any other DDL you deem necessary.
- *  include any deployment instructions in a readme.md file.  These can include manual steps that need to be run first (e.g. execute DDL scripts on the PostgreSQL database)
+ *  include any deployment instructions in a readme.md file.  These can include manual steps that need to be run first (e.g. execute DDL scripts on the PostgreSQL database). 
  *  invite our github user "fl-codereview" to be a collaborator on the repository
  *  create a pull request against your Github repository
  *  let us (your interview coordinator) know when you are ready to review
@@ -173,7 +171,37 @@ This container simulates the OLTP and event log activity in the docker-compose e
 *  creates new event log messages in `fl-eventlogs` via procedure `CreateAthleteProfileViewEvent`
 
 
-The service can be controlled by a table `testControl` in `fl-central`.
+The service can be controlled by a table `testControl` in `fl-central`.  When the service is started, the default settings are:
+
+** Athlete **
+*  StartAthleteCount: 1000
+*  AthleteInsertRatePerMin: 20
+*  AthleteUpdateRatePerMin: 15
+
+** AthleteProfileViewLog **
+*  StartEventCount: 100
+*  EventRatePerMin: 500
+
+
+INSERT INTO dbo.testControl(
+    StartAthleteCount 
+    ,MaxAthleteCount 
+    ,AthleteInsertRatePerMin 
+    ,AthleteUpdateRatePerMin 
+    ,StartEventCount 
+    ,MaxEventCount 
+    ,EventRatePerMin 
+    ,LatestOffset
+)
+VALUES (
+     1000 
+    ,300000
+    ,20 
+    ,15
+    ,100
+    ,200000000
+    ,500
+
 
 ```
 CREATE TABLE dbo.testControl(
