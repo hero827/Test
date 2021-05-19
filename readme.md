@@ -11,14 +11,6 @@ The objective of the exercise is to implement a data stream processor.  The solu
 
 ![Complete Setup](img/overview.png)
 
-
-## Setup
-
-#### Get the project code
-1. Import the exercise repository to your personal Github account. Using github's import tool (https://github.com/new/import) import this url: https://github.com/FieldLevel/fieldlevel-data-engineer-take-home/
-1. Invite our github user "fl-codereview" to be a collaborator on your new repository
-1. Get your new repository on your local machine
-
 ## Prerequisites
 
 1. docker
